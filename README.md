@@ -175,36 +175,32 @@ The following api routes have already been implemented for you (**Make sure to d
 
 This renders the `index.html` file that will be used to interact with the backend
 
+1. Post (Freet)
+
 #### `GET /api/freets` - Get all the freets
 
 **Returns**
-
 - An array of all freets sorted in descending order by date modified
 
 #### `GET /api/freets?author=USERNAME` - Get freets by author
 
 **Returns**
-
 - An array of freets created by user with username `author`
 
 **Throws**
-
 - `400` if `author` is not given
 - `404` if `author` is not a recognized username of any user
 
 #### `POST /api/freets` - Create a new freet
 
 **Body**
-
 - `content` _{string}_ - The content of the freet
 
 **Returns**
-
 - A success message
 - A object with the created freet
 
 **Throws**
-
 - `403` if the user is not logged in
 - `400` If the freet content is empty or a stream of empty spaces
 - `413` If the freet content is more than 140 characters long
@@ -212,11 +208,9 @@ This renders the `index.html` file that will be used to interact with the backen
 #### `DELETE /api/freets/:freetId?` - Delete an existing freet
 
 **Returns**
-
 - A success message
 
 **Throws**
-
 - `403` if the user is not logged in
 - `403` if the user is not the author of the freet
 - `404` if the freetId is invalid
@@ -224,36 +218,68 @@ This renders the `index.html` file that will be used to interact with the backen
 #### `PUT /api/freets/:freetId?` - Update an existing freet
 
 **Body**
-
 - `content` _{string}_ - The new content of the freet
 
 **Returns**
-
 - A success message
 - An object with the updated freet
 
 **Throws**
-
 - `403` if the user is not logged in
 - `404` if the freetId is invalid
 - `403` if the user is not the author of the freet
 - `400` if the new freet content is empty or a stream of empty spaces
 - `413` if the new freet content is more than 140 characters long
 
+- ##### `GET /api/freets?search=TERM` - Search all freets
+
+**Returns**
+- An array of all freets that fit the search criteria
+
+**Throws**
+- `403` if the user is not logged in
+- `400` if `search` is not given
+
+- ##### `GET /api/freets/content?search=TERM` - Search freets by content
+
+**Returns**
+- An array of all freets that have post content that fit the search criteria
+
+**Throws**
+- `403` if the user is not logged in
+- `400` if `search` is not given
+
+- ##### `GET /api/freets/name?search=TERM` - Search freets by account name
+
+**Returns**
+- An array of all freets that have account username's that fit the search criteria
+
+**Throws**
+- `403` if the user is not logged in
+- `400` if `search` is not given
+
+- ##### `GET /api/freets/username?search=TERM` - Search freets by account username
+
+**Returns**
+- An array of all freets that have account username's that fit the search criteria
+
+**Throws**
+- `403` if the user is not logged in
+- `400` if `search` is not given
+
+2. Auth (User)
+
 #### `POST /api/users/session` - Sign in user
 
 **Body**
-
 - `username` _{string}_ - The user's username
 - `password` _{string}_ - The user's password
 
 **Returns**
-
 - A success message
 - An object with user's details (without password)
 
 **Throws**
-
 - `403` if the user is already logged in
 - `400` if username or password is not in correct format format or missing in the req
 - `401` if the user login credentials are invalid
@@ -261,27 +287,22 @@ This renders the `index.html` file that will be used to interact with the backen
 #### `DELETE /api/users/session` - Sign out user
 
 **Returns**
-
 - A success message
 
 **Throws**
-
 - `403` if user is not logged in
 
 #### `POST /api/users` - Create an new user account
 
 **Body**
-
 - `username` _{string}_ - The user's username
 - `password` _{string}_ - The user's password
 
 **Returns**
-
 - A success message
 - An object with the created user's details (without password)
 
 **Throws**
-
 - `403` if there is a user already logged in
 - `400` if username or password is in the wrong format
 - `409` if username is already in use
@@ -289,17 +310,14 @@ This renders the `index.html` file that will be used to interact with the backen
 #### `PUT /api/users` - Update a user's profile
 
 **Body** _(no need to add fields that are not being changed)_
-
 - `username` _{string}_ - The user's username
 - `password` _{string}_ - The user's password
 
 **Returns**
-
 - A success message
 - An object with the update user details (without password)
 
 **Throws**
-
 - `403` if the user is not logged in
 - `400` if username or password is in the wrong format
 - `409` if the username is already in use
@@ -307,9 +325,232 @@ This renders the `index.html` file that will be used to interact with the backen
 #### `DELETE /api/users` - Delete user
 
 **Returns**
-
 - A success message
 
 **Throws**
-
 - `403` if the user is not logged in
+
+3. Following
+
+#### `GET /api/follows?account=USERNAME?` - Get all accounts followed by user with username `account`
+
+**Returns**
+- An array of all users followed by user with username `account`
+
+**Throws**
+- `400` if `account` is not given
+- `404` if `account` is not a recognized username of any user
+
+#### `GET /api/follow_requests?account=USERNAME` - Get all follow requests for user with username `account`
+
+**Returns**
+- An array of all follow requests for user with username `account`
+
+**Throws**
+- `400` if `account` is not given
+- `404` if `account` is not a recognized username of any user
+
+#### `POST /api/follows/:friendId/requests` - Request to follow another user with id `friendId`
+
+**Body**
+- `username` _{string}_ - The username of the user requesting to follow user with id `friendId`
+
+**Returns**
+- A success message
+- A object with the created follow request
+
+**Throws**
+- `400` if username is in the wrong format or missing in the req
+- `403` if the user is not logged in
+- `404` if the friendId is invalid
+- `409` if the user already follows user with id `friendId`
+
+#### `POST /api/follows` - Add follow (only allowed if the follow request has been accepted)
+
+**Body**
+- `follower` _{string}_ - The username of the user who now follows user with username `followee`
+- `followee` _{string}_ - The username of the user who is now followed by the user with username `follower`
+
+**Returns**
+- A success message
+- A object with the created follow
+
+**Throws**
+- `403` if the user is not logged in
+- `404` if the username follower or followee is invalid
+- `400` if follower or followee is in the wrong format or missing in the req
+- `409` if the follower already follows user with username `followee`
+
+- `409` if the follow request between the `follower` and `followee` has not been accepted ??
+
+#### `PATCH /api/follows/:userId/requests/:account?` - Update follow request from user with username `account`
+
+**Body**
+- `accepted` _{bool}_ - True represents that the request was accepted, False that the request was declined
+- `pending` _{bool}_ - True represents that the request hasn't been responded to, False represents that the request is no longer waiting to be accepted/declined
+
+**Returns**
+- A success message
+- An object with the updated follow request
+
+**Throws**
+- `403` if the user is not logged in
+- `404` if the user does not have a pending follow request from a user with username `account`
+- `400` if accepted or pending is of the wrong type or missing in the req
+
+#### `DELETE /api/follows/:userId/requests/:account?` - Remove follow request from user with username `account`
+
+**Returns**
+- A success message
+
+**Throws**
+- `403` if the user is not logged in
+- `404` if the user does not have a pending follow request from a user with username `account`
+
+#### `DELETE /api/follows/:userId/:account?` - Unfollow user with username `account`
+#### `DELETE /api/follows/:account?` - Unfollow user with username `account`
+
+**Returns**
+- A success message
+
+**Throws**
+- `403` if the user is not logged in
+- `404` if the username `account` is invalid
+- `404` if the user does not follow a user with username `account`
+
+
+
+4. Likes
+
+#### `POST /api/likes` - Add like to freet
+
+**Body**
+- `freetId` _{ObjectId}_ - The id of the item being liked
+
+**Returns**
+- A success message
+- A object with the created like
+
+**Throws**
+- `403` if the user is not logged in
+- `400` if freetId is in the wrong format or missing in the req
+- `404` if the freetId is invalid
+- `403` if user already liked freet with id `freetId`
+
+#### `DELETE /api/likes/:freetId?` - Remove like for freet
+
+**Returns**
+- A success message
+
+**Throws**
+- `403` if the user is not logged in
+- `403` if user already had not like freet with id `freetId`
+- `404` if the freetId is invalid 
+
+
+
+5. Bookmarks with Tags
+
+#### `POST /api/bookmarks` - Add bookmark item for user
+
+**Body**
+- `itemId` _{ObjectId}_ - The id of the item being bookmarked
+- `tags` _{array}_ - The array of tags associated with this bookmark
+
+**Returns**
+- A success message
+- A object with the created bookmark
+
+**Throws**
+- `403` if the user is not logged in
+- `400` if itemId or tags is in the wrong format or missing in the req
+- `404` if the itemId is invalid
+
+#### `DELETE /api/bookmarks/:itemId?` - Remove bookmark for item for user
+
+**Returns**
+- A success message
+
+**Throws**
+- `403` if the user is not logged in
+- `403` if the user does not have item with id `itemId` bookmarked
+- `404` if the itemId is invalid
+
+#### `PATCH /api/bookmarks/:itemId?` - Add tag to bookmark
+
+**Body**
+- `newTag` _{string}_ - The new tag to add to bookmarked item with id `itemId`
+
+**Returns**
+- A success message
+- A object with the updated bookmark
+
+**Throws**
+- `403` if the user is not logged in
+- `400` if newTag is in the wrong format or missing in the req
+- `404` if the itemId is invalid
+
+#### `DELETE /api/bookmarks/:itemId/:tag` - Remove tag from bookmark
+
+**Returns**
+- A success message
+
+**Throws**
+- `403` if the user is not logged in
+- `403` if the user does not have item with id `itemId` bookmarked
+- `404` if the itemId is invalid
+- `403` if the user does not have `tag` in list of tags for bookmarked item with id `itemId`
+
+#### `GET /api/bookmarks?tag=TAG` - Search for bookmarks containing TAG
+
+**Returns**
+- An array of all bookmarks that contain a tag called `tag`
+
+**Throws**
+- `403` if the user is not logged in
+- `400` if `tag` is not given
+
+
+
+6. Personas (novel concept)
+
+#### `GET /api/personas` - Get all personas for user
+
+**Returns**
+- An array of all personas for the current user
+
+**Throws**
+- `403` if the user is not logged in
+
+#### `GET /api/personas/:userId?name=NAME` - Get accounts followed by persona
+
+**Returns**
+- An array of all accounts followed by persona with NAME for current user
+
+**Throws**
+- `403` if the user is not logged in
+- `400` if `name` is not given
+- `404` if the `name` is invalid, no persona with that name exists for the user
+
+#### `POST /api/personas` - Add persona to user
+
+**Body**
+- `name` _{string}_ - The name of the new persona (and, if user wants an icon they can include an emoji in this string)
+
+**Returns**
+- A success message
+- A object with the created persona
+
+**Throws**
+- `403` if the user is not logged in
+- `400` if name is in the wrong format or missing in the req
+
+#### `DELETE /api/personas/:name` - Delete persona for user
+
+**Returns**
+- A success message
+- All accounts that were followed by this persona (so, user can have the option to transfer these to a different persona)
+
+**Throws**
+- `403` if the user is not logged in
+- `403` if the user does not have a persona with `name`
