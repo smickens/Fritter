@@ -1,6 +1,7 @@
 import type {NextFunction, Request, Response} from 'express';
 import express from 'express';
 import FreetCollection from './collection';
+import LikeCollection from '../like/collection';
 import * as userValidator from '../user/middleware';
 import * as freetValidator from '../freet/middleware';
 import * as util from './util';
@@ -79,7 +80,7 @@ router.post(
 /**
  * Delete a freet
  *
- * @name DELETE /api/freets/:id
+ * @name DELETE /api/freets/:freetId
  *
  * @return {string} - A success message
  * @throws {403} - If the user is not logged in or is not the author of
@@ -95,6 +96,7 @@ router.delete(
   ],
   async (req: Request, res: Response) => {
     await FreetCollection.deleteOne(req.params.freetId);
+    await LikeCollection.deleteMany(req.params.freetId); // removes all likes for this freet
     res.status(200).json({
       message: 'Your freet was deleted successfully.'
     });

@@ -38,8 +38,22 @@ const formsAndHandlers = {
   'view-freets-by-author': viewFreetsByAuthor,
   'create-freet': createFreet,
   'edit-freet': editFreet,
-  'delete-freet': deleteFreet
+  'delete-freet': deleteFreet,
+  'like-freet': likeFreet,
+  'unlike-freet': unlikeFreet
 };
+
+function likeFreet(fields) {
+  fetch('/api/likes', {method: 'POST', body: JSON.stringify(fields), headers: {'Content-Type': 'application/json'}})
+    .then(showResponse)
+    .catch(showResponse);
+}
+
+function unlikeFreet(fields) {
+  fetch(`/api/likes/${fields.id}`, {method: 'DELETE'})
+      .then(showResponse)
+      .catch(showResponse);
+}
 
 // Attach handlers to forms
 function init() {
