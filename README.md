@@ -231,7 +231,7 @@ This renders the `index.html` file that will be used to interact with the backen
 - `400` if the new freet content is empty or a stream of empty spaces
 - `413` if the new freet content is more than 140 characters long
 
-- ##### `GET /api/freets?search=TERM` - Search all freets
+#### `GET /api/freets?search=TERM` - Search all freets
 
 **Returns**
 - An array of all freets that fit the search criteria
@@ -240,7 +240,7 @@ This renders the `index.html` file that will be used to interact with the backen
 - `403` if the user is not logged in
 - `400` if `search` is not given
 
-- ##### `GET /api/freets/content?search=TERM` - Search freets by content
+#### `GET /api/freets/content?search=TERM` - Search freets by content
 
 **Returns**
 - An array of all freets that have post content that fit the search criteria
@@ -249,7 +249,7 @@ This renders the `index.html` file that will be used to interact with the backen
 - `403` if the user is not logged in
 - `400` if `search` is not given
 
-- ##### `GET /api/freets/name?search=TERM` - Search freets by account name
+#### `GET /api/freets/name?search=TERM` - Search freets by account name
 
 **Returns**
 - An array of all freets that have account username's that fit the search criteria
@@ -258,7 +258,7 @@ This renders the `index.html` file that will be used to interact with the backen
 - `403` if the user is not logged in
 - `400` if `search` is not given
 
-- ##### `GET /api/freets/username?search=TERM` - Search freets by account username
+#### `GET /api/freets/username?search=TERM` - Search freets by account username
 
 **Returns**
 - An array of all freets that have account username's that fit the search criteria
@@ -510,9 +510,7 @@ This renders the `index.html` file that will be used to interact with the backen
 - `403` if the user is not logged in
 - `400` if `tag` is not given
 
-
-
-6. Personas (novel concept)
+6. Personas
 
 #### `GET /api/personas` - Get all personas for user
 
