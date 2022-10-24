@@ -29,33 +29,46 @@ function showResponse(response) {
 // Map form (by id) to the function that should be called on submit
 const formsAndHandlers = {
   // Auth (User) concept
-  // 'create-user': createUser,
-  // 'delete-user': deleteUser,
+  'create-user': createUser,
+  'delete-user': deleteUser,
   // 'change-username': changeUsername,
   // 'change-password': changePassword,
   'sign-in': signIn,
-  // 'sign-out': signOut,
+  'sign-out': signOut,
 
   // Post (Freet) concept
-  'view-all-freets': viewAllFreets,
+  // 'view-all-freets': viewAllFreets,
   // 'view-freets-by-author': viewFreetsByAuthor,
   // 'create-freet': createFreet,
   // 'edit-freet': editFreet,
-  'delete-freet': deleteFreet,
+  // 'delete-freet': deleteFreet,
 
   // Like concept
   // 'like-freet': likeFreet,
   // 'unlike-freet': unlikeFreet,
 
   // Bookmark concept
-  'add-bookmark': addBookmark,
-  'delete-bookmark': deleteBookmark,
-  'view-all-bookmarks': viewAllBookmarks,
-  'view-all-bookmarks-with-tag': viewAllBookmarksWithTag,
+  // 'add-bookmark': addBookmark,
+  // 'delete-bookmark': deleteBookmark,
+  // 'view-all-bookmarks': viewAllBookmarks,
+  // 'view-all-bookmarks-with-tag': viewAllBookmarksWithTag,
 
   // Bookmark concept
-  'add-tag': addTag,
-  'delete-tag': deleteTag
+  // 'add-tag': addTag,
+  // 'delete-tag': deleteTag,
+
+  // Follow concept
+  'add-follow': addFollow,
+  'delete-follow': deleteFollow,
+  'view-all-follows-by-user': viewAllFollowsByUser,
+  'update-follow': updateFollow,
+  'add-follow-with-persona': addFollow,
+
+  // Persona concept
+  'add-persona': addPersona,
+  'delete-persona': deletePersona,
+  'view-all-personas': viewAllPersonas,
+  'view-persona-with-name': viewPersonaWithName
 };
 
 // Attach handlers to forms

@@ -10,6 +10,8 @@
   <script src="/scripts/like.js"></script>
   <script src="/scripts/bookmark.js"></script>
   <script src="/scripts/tag.js"></script>
+  <script src="/scripts/follow.js"></script>
+  <script src="/scripts/persona.js"></script>
   <script src="/scripts/index.js"></script>
 </head>
 
@@ -22,7 +24,7 @@
     <section id="operations-container">
       <h2>Operations:</h2>
       <div class="scrollbox">
-        <!-- <form id="create-user">
+        <form id="create-user">
           <h3>Create User</h3>
           <div>
             <label for="username">Username:</label>
@@ -40,7 +42,7 @@
           <input type="submit" value="Delete User">
         </form>
 
-        <form id="change-username">
+        <!-- <form id="change-username">
           <h3>Change Username</h3>
           <div>
             <label for="username">New Username:</label>
@@ -71,17 +73,17 @@
           <input type="submit" value="Sign In">
         </form>
 
-        <!-- <form id="sign-out">
+        <form id="sign-out">
           <h3>Sign Out</h3>
           <input type="submit" value="Sign out">
-        </form> -->
+        </form>
 
-        <form id="view-all-freets">
+        <!-- <form id="view-all-freets">
             <h3>View All Freets</h3>
             <input type="submit" value="View All Freets">
           </form>
 
-        <!-- <form id="view-freets-by-author">
+        <form id="view-freets-by-author">
           <h3>View Freets By Author</h3>
           <div>
             <label for="author">Author:</label>
@@ -110,7 +112,7 @@
             <textarea id="content" name="content"></textarea>
           </div>
           <input type="submit" value="Edit Freet">
-        </form> -->
+        </form>
 
         <form id="delete-freet">
           <h3>Delete Freet</h3>
@@ -121,7 +123,7 @@
           <input type="submit" value="Delete Freet">
         </form>
 
-        <!-- <form id="like-freet">
+        <form id="like-freet">
           <h3>Like Freet</h3>
           <div>
             <label for="id">ID:</label>
@@ -137,7 +139,7 @@
             <input id="id" name="id">
           </div>
           <input type="submit" value="Unlike Freet">
-        </form> -->
+        </form>
 
         <form id="add-bookmark">
           <h3>Add Bookmark</h3>
@@ -195,7 +197,93 @@
             <input id="tag" name="tag">
           </div>
           <input type="submit" value="Delete Tag">
+        </form> -->
+
+        <form id="add-follow">
+          <h3>Add Follow</h3>
+          <div>
+            <label for="friendId">Friend ID:</label>
+            <input id="friendId" name="friendId">
+          </div>
+          <input type="submit" value="Add Follow">
         </form>
+
+        <form id="add-follow-with-persona">
+          <h3>Add Follow w/ Persona</h3>
+          <div>
+            <label for="friendId">Friend ID:</label>
+            <input id="friendId" name="friendId">
+          </div>
+          <div>
+            <label for="name">Name:</label>
+            <input id="name" name="name">
+          </div>
+          <input type="submit" value="Add Follow w/ Persona">
+        </form>
+
+        <form id="update-follow">
+          <h3>Update Follow Persona</h3>
+          <div>
+            <label for="friendId">Friend ID:</label>
+            <input id="friendId" name="friendId">
+          </div>
+          <div>
+            <label for="name">Name:</label>
+            <input id="name" name="name">
+          </div>
+          <input type="submit" value="Update Follow Persona">
+        </form>
+
+        <form id="delete-follow">
+          <h3>Delete Follow</h3>
+          <div>
+            <label for="friendId">Friend ID:</label>
+            <input id="friendId" name="friendId">
+          </div>
+          <input type="submit" value="Delete Follow">
+        </form>
+
+        <form id="view-all-follows-by-user">
+          <h3>View All Follows By User</h3>
+          <div>
+            <label for="id">User Id:</label>
+            <input id="id" name="id">
+          </div>
+          <input type="submit" value="View Follows by User">
+        </form>
+
+        <form id="add-persona">
+          <h3>Add Persona</h3>
+          <div>
+            <label for="name">Name:</label>
+            <input id="name" name="name">
+          </div>
+          <input type="submit" value="Add Persona">
+        </form>
+
+        <form id="delete-persona">
+          <h3>Delete Persona</h3>
+          <div>
+            <label for="name">Name:</label>
+            <input id="name" name="name">
+          </div>
+          <input type="submit" value="Delete Persona">
+        </form>
+
+        <form id="view-all-personas">
+          <h3>View All Personas</h3>
+          <input type="submit" value="View All Personas">
+        </form>
+
+        <form id="view-persona-with-name">
+          <h3>View Persona With Name</h3>
+          <div>
+            <label for="name">Name:</label>
+            <input id="name" name="name">
+          </div>
+          <input type="submit" value="View Persona With Name">
+        </form>
+
       </div>
     </section>
     <section>

@@ -8,19 +8,21 @@ import * as util from './util';
 
 const router = express.Router();
 
-// TODO: is this needed, we get this off the bookmark throught the virtual property right?
 /**
  * Get all the tags for bookmark with bookmarkId
  *
  * @name GET /api/bookmarks/:bookmarkId/tag
  *
- * @return {BookmarkResponse[]} - A list of all the bookmarks sorted in descending order by date created
+ * @return {TagResponse[]} - A list of all the bookmarks sorted in descending order by date created
  * @throws {403} - If user is not logged in
+ * @throws {404} - If the bookmarkId is not valid
  */
 router.get(
   '/:bookmarkId/tags',
   [
     userValidator.isUserLoggedIn,
+    bookmarkValidator.isBookmarkExists,
+    bookmarkValidator.isBookmarkCreator
   ],
   async (req: Request, res: Response, next: NextFunction) => {
     const bookmarkTags = await TagCollection.findAllByBookmark(req.params.bookmarkId);

@@ -62,7 +62,7 @@ const isFreetNotBookmarked = async (req: Request, res: Response, next: NextFunct
   const bookmark = await BookmarkCollection.findOne(req.params.bookmarkId);
   if (req.session.userId !== bookmark.userId.toString()) {
     res.status(403).json({
-      error: 'Cannot delete other users\' bookmarks.'
+      error: 'Cannot read/modify another users\' bookmark.'
     });
     return;
   }

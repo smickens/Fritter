@@ -14,6 +14,8 @@ import {freetRouter} from '../freet/router';
 import {likeRouter} from '../like/router';
 import {bookmarkRouter} from '../bookmark/router';
 import {tagRouter} from '../tag/router';
+import {followRouter} from '../follow/router';
+import { personaRouter } from '../persona/router';
 
 // Load environmental variables
 dotenv.config({});
@@ -82,6 +84,8 @@ app.use('/api/freets', freetRouter);
 app.use('/api/likes', likeRouter);
 app.use('/api/bookmarks', bookmarkRouter);
 app.use('/api/bookmarks', tagRouter);
+app.use('/api/follows', followRouter);
+app.use('/api/personas', personaRouter);
 
 // Catch all the other routes and display error message
 app.all('*', (req: Request, res: Response) => {

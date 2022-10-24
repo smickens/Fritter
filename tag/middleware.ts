@@ -1,6 +1,7 @@
 import type {Request, Response, NextFunction} from 'express';
 import {Types} from 'mongoose';
 import TagCollection from './collection';
+import BookmarkCollection from '../bookmark/collection';
 
 function checkIfTagIsValid(tag: string): boolean {
   if (tag.length == 0 || tag.length > 20) {
@@ -30,8 +31,6 @@ const isValidTag = (req: Request, res: Response, next: NextFunction) => {
  * Checks if the current user is the author of the freet whose freetId is in req.params
  */
  const containsTag = async (req: Request, res: Response, next: NextFunction) => {
-  console.log(req.body);
-  console.log(req.params);
     const {tag} = req.params as {tag: string};
 
     if (!checkIfTagIsValid(tag)) {
@@ -44,7 +43,7 @@ const isValidTag = (req: Request, res: Response, next: NextFunction) => {
     const bookmark = await TagCollection.findOne(req.params.bookmarkId, tag);
     if (!bookmark) {
       res.status(403).json({
-        error: 'Cannot remove tag that does not exist on this bookmark.'
+        error: `Cannot remove tag, ${tag}, that does not exist on this bookmark.`
       });
       return;
     }
@@ -59,7 +58,7 @@ const isValidTag = (req: Request, res: Response, next: NextFunction) => {
     const bookmark = await TagCollection.findOne(req.params.bookmarkId, req.body.tag);
     if (bookmark) {
       res.status(403).json({
-        error: 'Cannot add tag that already exists on this bookmark.'
+        error: `Cannot add tag, ${req.body.tag}, that already exists on this bookmark.`
       });
       return;
     }

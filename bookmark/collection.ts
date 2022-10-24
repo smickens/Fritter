@@ -47,7 +47,7 @@ class BookmarkCollection {
    * @return {Promise<HydratedDocument<Bookmark>[]>} - An array of all of the bookmarks for this user
    */
   static async findAllByUser(userId: Types.ObjectId | string): Promise<Array<HydratedDocument<Bookmark>>> {
-    return BookmarkModel.find({userId: userId})
+    return BookmarkModel.find({userId: userId}).sort({dateCreated: -1})
               .populate('freetId')
               .populate('tags')
               .exec();

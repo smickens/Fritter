@@ -12,7 +12,7 @@ const isLiked = async (req: Request, res: Response, next: NextFunction) => {
     if (!like) {
       res.status(403).json({
         error: {
-          freetNotFound: `Like for freet from user with ID ${req.session.userId} with freet ID ${req.params.freetId} does not exist.`
+          likeNotFound: `Like for freet from user with ID ${req.session.userId} with freet ID ${req.params.freetId} does not exist.`
         }
       });
       return;
@@ -30,7 +30,7 @@ const isNotLiked = async (req: Request, res: Response, next: NextFunction) => {
     if (like) {
       res.status(403).json({
         error: {
-          freetNotFound: `Like for freet from user with ID ${req.session.userId} with freet ID ${req.body.id} already exists.`
+          likeAlreadyExists: `Like for freet from user with ID ${req.session.userId} with freet ID ${req.body.id} already exists.`
         }
       });
       return;
@@ -47,7 +47,7 @@ const isNotLiked = async (req: Request, res: Response, next: NextFunction) => {
   if (!validFormat) {
     res.status(400).json({
       error: {
-        username: 'FreetId must be of type objectId.'
+        freetId: 'FreetId must be of type objectId.'
       }
     });
     return;

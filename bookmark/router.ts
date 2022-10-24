@@ -22,7 +22,7 @@ const router = express.Router();
  *
  * @name GET /api/bookmarks?tag=TAG
  *
- * @return {BookmarkResponse[]} - An array of freets created by user with id, authorId
+ * @return {BookmarkResponse[]} - An array of bookmarks for current user containing tag
  * @throws {400} - If tag is not given or is not valid
  * @throws {403} - If user is not logged in
  *
@@ -64,7 +64,7 @@ router.get(
  * @return {BookmarkResponse} - The created freet
  * @throws {403} - If the user is not logged in
  * @throws {400} - If itemId or tags is in the wrong format or missing in the req
- * @throws {413} - If the itemId is invalid
+ * @throws {404} - If the itemId is invalid
  * @throws {403} - If the user already has item with id `itemId` bookmarked
  */
 router.post(
@@ -88,7 +88,7 @@ router.post(
 /**
  * Delete a bookmark
  *
- * @name DELETE /api/bookmarks/:bookmarkId
+ * @name DELETE /api/bookmarks/:bookmarkId?
  *
  * @return {string} - A success message
  * @throws {403} - If the user is not logged in
