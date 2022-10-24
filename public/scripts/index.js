@@ -28,32 +28,35 @@ function showResponse(response) {
 
 // Map form (by id) to the function that should be called on submit
 const formsAndHandlers = {
-  'create-user': createUser,
-  'delete-user': deleteUser,
-  'change-username': changeUsername,
-  'change-password': changePassword,
+  // Auth (User) concept
+  // 'create-user': createUser,
+  // 'delete-user': deleteUser,
+  // 'change-username': changeUsername,
+  // 'change-password': changePassword,
   'sign-in': signIn,
-  'sign-out': signOut,
+  // 'sign-out': signOut,
+
+  // Post (Freet) concept
   'view-all-freets': viewAllFreets,
-  'view-freets-by-author': viewFreetsByAuthor,
-  'create-freet': createFreet,
-  'edit-freet': editFreet,
+  // 'view-freets-by-author': viewFreetsByAuthor,
+  // 'create-freet': createFreet,
+  // 'edit-freet': editFreet,
   'delete-freet': deleteFreet,
-  'like-freet': likeFreet,
-  'unlike-freet': unlikeFreet
+
+  // Like concept
+  // 'like-freet': likeFreet,
+  // 'unlike-freet': unlikeFreet,
+
+  // Bookmark concept
+  'add-bookmark': addBookmark,
+  'delete-bookmark': deleteBookmark,
+  'view-all-bookmarks': viewAllBookmarks,
+  'view-all-bookmarks-with-tag': viewAllBookmarksWithTag,
+
+  // Bookmark concept
+  'add-tag': addTag,
+  'delete-tag': deleteTag
 };
-
-function likeFreet(fields) {
-  fetch('/api/likes', {method: 'POST', body: JSON.stringify(fields), headers: {'Content-Type': 'application/json'}})
-    .then(showResponse)
-    .catch(showResponse);
-}
-
-function unlikeFreet(fields) {
-  fetch(`/api/likes/${fields.id}`, {method: 'DELETE'})
-      .then(showResponse)
-      .catch(showResponse);
-}
 
 // Attach handlers to forms
 function init() {

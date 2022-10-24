@@ -1,3 +1,4 @@
+import { Bookmark } from 'bookmark/model';
 import type {Types} from 'mongoose';
 import {Schema, model} from 'mongoose';
 
@@ -12,6 +13,7 @@ export type User = {
   username: string;
   password: string;
   dateJoined: Date;
+  // bookmarks: [Bookmark]
 };
 
 // Mongoose schema definition for interfacing with a MongoDB table
@@ -33,6 +35,12 @@ const UserSchema = new Schema({
     type: Date,
     required: true
   }
+});
+
+UserSchema.virtual('bookmarks', {
+  ref: 'Bookmark',
+  localField: '_id',
+  foreignField: 'userId'
 });
 
 const UserModel = model<User>('User', UserSchema);

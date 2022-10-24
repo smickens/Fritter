@@ -5,5 +5,15 @@
  * e.g. for createUser, fields has properites 'username' and 'password'
  */
 
-
+ function likeFreet(fields) {
+    fetch('/api/likes', {method: 'POST', body: JSON.stringify(fields), headers: {'Content-Type': 'application/json'}})
+      .then(showResponse)
+      .catch(showResponse);
+  }
+  
+  function unlikeFreet(fields) {
+    fetch(`/api/likes/${fields.id}`, {method: 'DELETE'})
+        .then(showResponse)
+        .catch(showResponse);
+  }
   
