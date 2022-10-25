@@ -2,9 +2,12 @@ import type {NextFunction, Request, Response} from 'express';
 import express from 'express';
 import FreetCollection from './collection';
 import LikeCollection from '../like/collection';
+import BookmarkCollection from '../bookmark/collection';
+import TagCollection from '../tag/collection';
 import * as userValidator from '../user/middleware';
 import * as freetValidator from '../freet/middleware';
 import * as util from './util';
+import { Bookmark } from 'bookmark/model';
 
 const router = express.Router();
 
@@ -95,8 +98,18 @@ router.delete(
     freetValidator.isValidFreetModifier
   ],
   async (req: Request, res: Response) => {
+    const bookmarksByUser = await BookmarkCollection.findAllByUser(req.session.userId);
+    bookmarksByUser.forEach(async (bookmark: Bookmark) => {
+      console.log(bookmark.freetId._id);
+      if (bookmark.freetId._id.toString() == req.params.freetId) {
+        await TagCollection.deleteMany(bookmark._id);
+      }
+    });
+
     await FreetCollection.deleteOne(req.params.freetId);
     await LikeCollection.deleteMany(req.params.freetId); // removes all likes for this freet
+    await BookmarkCollection.deleteManyByFreetId(req.params.freetId); // removes all bookmarks for this freet
+    
     res.status(200).json({
       message: 'Your freet was deleted successfully.'
     });

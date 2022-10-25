@@ -3,9 +3,6 @@ import {Types} from 'mongoose';
 import BookmarkCollection from './collection';
 import FreetCollection from '../freet/collection';
 
-/**
- * Checks if a freet with freetId is req.params exists
- */
 const isBookmarkExists = async (req: Request, res: Response, next: NextFunction) => {
   const validFormat = Types.ObjectId.isValid(req.params.bookmarkId);
   const bookmark = validFormat ? await BookmarkCollection.findOne(req.params.bookmarkId) : '';
@@ -21,9 +18,6 @@ const isBookmarkExists = async (req: Request, res: Response, next: NextFunction)
   next();
 };
 
-/**
- * Checks if the current user is the author of the freet whose freetId is in req.params
- */
 const isFreetNotBookmarked = async (req: Request, res: Response, next: NextFunction) => {
   const userBookmarkedFreets = await BookmarkCollection.findAllByUser(req.session.userId);
   const userBookmarkedFreetIds = userBookmarkedFreets.map(bookmark => { return bookmark.freetId._id.toString() });
@@ -37,9 +31,6 @@ const isFreetNotBookmarked = async (req: Request, res: Response, next: NextFunct
   next();
 };
 
-/**
- * Checks if a freet with freetId is req.params exists
- */
  const isFreetExists = async (req: Request, res: Response, next: NextFunction) => {
   const validFormat = Types.ObjectId.isValid(req.body.id);
   const freet = validFormat ? await FreetCollection.findOne(req.body.id) : '';
@@ -55,9 +46,6 @@ const isFreetNotBookmarked = async (req: Request, res: Response, next: NextFunct
   next();
 };
 
-/**
- * Checks if a bookmark with bookmarkId was created by current user
- */
  const isBookmarkCreator = async (req: Request, res: Response, next: NextFunction) => {
   const bookmark = await BookmarkCollection.findOne(req.params.bookmarkId);
   if (req.session.userId !== bookmark.userId.toString()) {
@@ -70,10 +58,6 @@ const isFreetNotBookmarked = async (req: Request, res: Response, next: NextFunct
   next();
 };
 
-/**
- * Checks if the content of the freet in req.body is valid, i.e not a stream of empty
- * spaces and not more than 140 characters
- */
 const isValidTag = (req: Request, res: Response, next: NextFunction) => {
   const {tag} = req.query as {tag: string};
 

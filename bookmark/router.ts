@@ -1,6 +1,7 @@
 import type {NextFunction, Request, Response} from 'express';
 import express from 'express';
 import BookmarkCollection from './collection';
+import TagCollection from '../tag/collection';
 import * as userValidator from '../user/middleware';
 import * as freetValidator from '../freet/middleware';
 import * as tagValidator from '../tag/middleware';
@@ -103,6 +104,7 @@ router.delete(
   ],
   async (req: Request, res: Response) => {
     await BookmarkCollection.deleteOne(req.params.bookmarkId);
+    await TagCollection.deleteMany(req.params.bookmarkId);
     res.status(200).json({
       message: 'Your bookmark was deleted successfully.'
     });

@@ -82,12 +82,14 @@ router.get(
  * @throws {400} - If friendId or name is in the wrong format or missing in the req
  * @throws {409} - If user with userId is already following user with friendId
  * @throws {403} - if user has no persona called name
+ * @throws {404} - if the friendId is invalid
  *
  */
 router.post(
   '/',
   [
     userValidator.isUserLoggedIn,
+    followValidator.isFriendExists,
     followValidator.canFollow
   ],
   async (req: Request, res: Response) => {
@@ -126,6 +128,7 @@ router.post(
     '/:friendId?',
     [
       userValidator.isUserLoggedIn,
+      followValidator.isValidFriend,
       followValidator.canNotFollow
     ],
     async (req: Request, res: Response) => {
@@ -153,6 +156,7 @@ router.post(
   '/:friendId?',
   [
     userValidator.isUserLoggedIn,
+    followValidator.isValidFriend,
     followValidator.canNotFollow, // already following
     followValidator.isPersonaExists
   ],

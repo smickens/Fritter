@@ -10,10 +10,6 @@ function checkIfTagIsValid(tag: string): boolean {
   return true;
 }
 
-/**
- * Checks if the content of the freet in req.body is valid, i.e not a stream of empty
- * spaces and not more than 140 characters
- */
 const isValidTag = (req: Request, res: Response, next: NextFunction) => {
   const {tag} = req.body as {tag: string};
 
@@ -27,9 +23,6 @@ const isValidTag = (req: Request, res: Response, next: NextFunction) => {
   next();
 };
 
-/**
- * Checks if the current user is the author of the freet whose freetId is in req.params
- */
  const containsTag = async (req: Request, res: Response, next: NextFunction) => {
     const {tag} = req.params as {tag: string};
 
@@ -51,9 +44,6 @@ const isValidTag = (req: Request, res: Response, next: NextFunction) => {
     next();
   };
 
-/**
- * Checks if the current user is the author of the freet whose freetId is in req.params
- */
  const notContainsTag = async (req: Request, res: Response, next: NextFunction) => {
     const bookmark = await TagCollection.findOne(req.params.bookmarkId, req.body.tag);
     if (bookmark) {

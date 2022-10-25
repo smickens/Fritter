@@ -31,31 +31,31 @@ const formsAndHandlers = {
   // Auth (User) concept
   'create-user': createUser,
   'delete-user': deleteUser,
-  // 'change-username': changeUsername,
-  // 'change-password': changePassword,
+  'change-username': changeUsername,
+  'change-password': changePassword,
   'sign-in': signIn,
   'sign-out': signOut,
 
   // Post (Freet) concept
-  // 'view-all-freets': viewAllFreets,
-  // 'view-freets-by-author': viewFreetsByAuthor,
-  // 'create-freet': createFreet,
-  // 'edit-freet': editFreet,
-  // 'delete-freet': deleteFreet,
+  'view-all-freets': viewAllFreets,
+  'view-freets-by-author': viewFreetsByAuthor,
+  'create-freet': createFreet,
+  'edit-freet': editFreet,
+  'delete-freet': deleteFreet,
 
   // Like concept
-  // 'like-freet': likeFreet,
-  // 'unlike-freet': unlikeFreet,
+  'like-freet': likeFreet,
+  'unlike-freet': unlikeFreet,
 
   // Bookmark concept
-  // 'add-bookmark': addBookmark,
-  // 'delete-bookmark': deleteBookmark,
-  // 'view-all-bookmarks': viewAllBookmarks,
-  // 'view-all-bookmarks-with-tag': viewAllBookmarksWithTag,
+  'add-bookmark': addBookmark,
+  'delete-bookmark': deleteBookmark,
+  'view-all-bookmarks': viewAllBookmarks,
+  'view-all-bookmarks-with-tag': viewAllBookmarksWithTag,
 
   // Bookmark concept
-  // 'add-tag': addTag,
-  // 'delete-tag': deleteTag,
+  'add-tag': addTag,
+  'delete-tag': deleteTag,
 
   // Follow concept
   'add-follow': addFollow,

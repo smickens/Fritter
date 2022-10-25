@@ -175,7 +175,7 @@ The following api routes have already been implemented for you (**Make sure to d
 
 This renders the `index.html` file that will be used to interact with the backend
 
-1. Post (Freet)
+### Post (Freet)
 
 #### `GET /api/freets` - Get all the freets
 
@@ -231,7 +231,7 @@ This renders the `index.html` file that will be used to interact with the backen
 - `400` if the new freet content is empty or a stream of empty spaces
 - `413` if the new freet content is more than 140 characters long
 
-2. Auth (User)
+### Auth (User)
 
 #### `POST /api/users/session` - Sign in user
 
@@ -294,7 +294,7 @@ This renders the `index.html` file that will be used to interact with the backen
 **Throws**
 - `403` if the user is not logged in
 
-3. Following
+### Following
 
 #### `GET /api/follows?account=USER_ID` - Get all accounts followed by user with user id `account`
 
@@ -375,7 +375,7 @@ This renders the `index.html` file that will be used to interact with the backen
 - `404` if `friendId` is invalid
 - `403` if the user does not follow a user with id `friendId`
 
-4. Likes
+### Likes
 
 #### `POST /api/likes` - Add like to freet
 
@@ -402,7 +402,7 @@ This renders the `index.html` file that will be used to interact with the backen
 - `403` if user already had not like freet with id `freetId`
 - `404` if the freetId is invalid 
 
-5. Personas
+### Personas
 
 #### `GET /api/personas` - Get all personas for user
 
@@ -446,7 +446,7 @@ This renders the `index.html` file that will be used to interact with the backen
 - `400` if the `name` is missing in the req or invalid
 - `400` if no persona with that name exists for the user
 
-6. Bookmarks
+### Bookmarks
 
 #### `GET /api/bookmarks` - Get all the bookmarks for current user
 
@@ -489,7 +489,7 @@ This renders the `index.html` file that will be used to interact with the backen
 - `403` if the user is not logged in
 - `404` if the bookmarkId is invalid
 
-7. Tag 
+### Tag 
 
 #### `GET /api/bookmarks/:bookmarkId/tag` - Get all tags for bookmark with bookmarkId
 
